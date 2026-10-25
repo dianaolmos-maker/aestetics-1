@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solicita tu diagnóstico — Mastery Aesthetics</title>
+<meta name="description" content="Cuéntanos de tu clínica y solicita tu diagnóstico de crecimiento gratuito con Mastery Aesthetics. Atendemos clínicas en todo Estados Unidos.">
+<style>
+  :root {
+    --orchid: #7A2394;
+    --orchid-dark: #5E1B72;
+    --orchid-soft: #F3E9F7;
+    --tomato: #FF6347;
+    --amber: #FFA51F;
+    --grad: linear-gradient(90deg, #7A2394 0%, #7A2394 75%, #FF6347 95%, #FFA51F 100%);
+    --ink: #212121;
+    --muted: #5C5C63;
+    --line: #DAD8E0;
+    --smoke: #F6F5F4;
+    --green: #1F8A4C;
+    --red: #C62828;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #fff; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Arial, sans-serif;
+    color: var(--ink);
+    line-height: 1.45;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  a { color: var(--orchid); }
+  .top { text-align: center; padding: 14px 16px 10px; }
+  .top img { height: 34px; width: auto; }
+  .bar { height: 4px; background: var(--smoke); }
+  .bar span { display: block; height: 100%; width: 10%; background: var(--grad); transition: width .35s ease; }
+  main { flex: 1; width: 100%; max-width: 560px; margin: 0 auto; padding: 26px 16px 32px; }
+  .step { display: none; }
+  .step.on { display: block; animation: in .25s ease; }
+  @keyframes in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  h1 { font-size: 1.45rem; line-height: 1.25; font-weight: 800; margin-bottom: 18px; letter-spacing: -.01em; }
+  .protocols { font-size: .95rem; color: var(--muted); margin: -8px 0 18px; }
+  .protocols b { color: var(--orchid); }
+  .kicker { font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--orchid); margin-bottom: 8px; }
+  .lead { font-size: 1rem; font-weight: 600; margin: -6px 0 16px; }
+  .label { font-size: .9rem; font-weight: 600; margin-bottom: 10px; }
+  .field { position: relative; border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px 6px; margin-bottom: 10px; background: #fff; }
+  .field:focus-within { border: 2px solid var(--orchid); padding: 6px 11px 5px; }
+  .field label { display: block; font-size: .7rem; font-weight: 700; color: var(--ink); }
+  .field input { width: 100%; border: 0; outline: 0; font-size: 1rem; padding: 2px 0; background: transparent; color: var(--ink); }
+  .field .ok { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; border-radius: 50%; background: #DDF2E5; color: var(--green); font-size: 13px; line-height: 22px; text-align: center; display: none; }
+  .field.valid .ok { display: block; }
+  .row { display: flex; gap: 10px; }
+  .row .field { flex: 1; min-width: 0; }
+  .city { color: var(--green); font-size: .92rem; margin: -2px 0 14px; min-height: 1.2em; }
+  .city.bad { color: var(--red); }
+  .opts { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
+  .opt { display: flex; align-items: center; gap: 12px; width: 100%; padding: 15px 14px; background: #fff; border: 0; border-bottom: 1px solid var(--line); font: inherit; font-size: .97rem; color: var(--ink); text-align: left; cursor: pointer; }
+  .opt:last-child { border-bottom: 0; }
+  .opt:hover, .opt.sel { background: var(--orchid-soft); }
+  .radio { flex: none; width: 20px; height: 20px; border: 2px solid #9A97A3; border-radius: 50%; position: relative; }
+  .opt.sel .radio { border-color: var(--orchid); }
+  .opt.sel .radio::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--orchid); }
+  .chev { margin-left: auto; font-size: 1.3rem; color: var(--orchid); line-height: 1; }
+  .other { display: none; padding: 0 14px 14px; background: var(--orchid-soft); }
+  .other.on { display: block; }
+  .other input { width: 100%; border: 2px solid var(--orchid); border-radius: 8px; padding: 11px 12px; font-size: .97rem; }
+  .words { display: flex; align-items: center; gap: 10px; border: 2px solid var(--orchid); border-radius: 12px; padding: 12px 14px; margin: 18px 0 16px; box-shadow: 0 0 0 3px rgba(122,35,148,.08); }
+  .words span { color: var(--orchid); font-size: 1.1rem; }
+  .words input { flex: 1; min-width: 0; border: 0; outline: 0; font-size: .97rem; background: transparent; }
+  .nav { display: flex; gap: 12px; }
+  .btn { flex: 1; border: 0; border-radius: 8px; padding: 14px; font: inherit; font-weight: 700; font-size: 1rem; cursor: pointer; background: var(--orchid); color: #fff; }
+  .btn:hover { background: var(--orchid-dark); }
+  .btn:disabled { opacity: .55; cursor: not-allowed; }
+  .btn.back { flex: 0 0 34%; background: #fff; color: var(--ink); border: 1px solid var(--line); font-weight: 600; }
+  .btn.back:hover { background: var(--smoke); }
+  .center { text-align: center; }
+  .progress { height: 10px; border-radius: 6px; background: #ECEAF0; overflow: hidden; margin: 18px 0 16px; }
+  .progress span { display: block; height: 100%; width: 0; background: var(--grad); border-radius: 6px; }
+  .msg { width: 100%; min-height: 170px; border: 1px solid var(--line); border-radius: 8px; padding: 12px; font: inherit; font-size: .97rem; line-height: 1.55; resize: vertical; }
+  .count { text-align: right; font-size: .72rem; color: var(--muted); margin: 4px 0 16px; }
+  .project { color: var(--ink); margin: -6px 0 16px; font-size: .97rem; }
+  .consent-block { display: flex; gap: 10px; align-items: flex-start; margin: 12px 0; }
+  .consent-block input { flex: none; width: 20px; height: 20px; margin-top: 2px; accent-color: var(--orchid); }
+  .consent-block p { font-size: .8rem; color: var(--ink); line-height: 1.45; }
+  .legal { font-size: .76rem; color: var(--muted); margin: 6px 0 16px; }
+  .err { color: var(--red); font-size: .85rem; margin: -4px 0 10px; min-height: 1em; }
+  .opt-group { padding: 10px 14px 6px; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--smoke); border-bottom: 1px solid var(--line); }
+  #ghlForm iframe { display: block; width: 100%; min-height: 900px; }
+  .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .thanks h1 { margin-bottom: 10px; }
+  .thanks p { color: var(--muted); }
+  footer { background: #212121; color: #CFCBD6; padding: 20px 16px; font-size: .82rem; }
+  footer div { max-width: 560px; margin: 0 auto; }
+  footer a { display: inline-block; margin: 8px 16px 0 0; color: #fff; }
+</style>
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1086369954259982');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=1086369954259982&ev=PageView&noscript=1"></noscript>
+<!-- End Meta Pixel -->
+</head>
+<body>
+
+<div class="top"><a href="index.html"><img src="logo-light.png" alt="Mastery Aesthetics"></a></div>
+<div class="bar"><span id="bar"></span></div>
+
+<main>
+<form id="flow" novalidate>
+
+  <!-- 1. Tratamiento de mayor valor (la especialidad, el ZIP, la facturación y los datos de contacto los pide el formulario de GHL del paso 4) -->
+  <section class="step on" data-step="detail">
+    <p class="kicker">Diagnóstico de crecimiento gratuito</p>
+    <h1>Llena tu agenda con pacientes de alto valor</h1>
+    <p class="protocols">Dos protocolos que no vas a encontrar en otra agencia: <b>Reactivación Asistida™</b>, para que un paciente te compre varias veces, y <b>Pauta Asistida™</b>, para escalar sin que la pauta salga de tu bolsillo, si tu clínica califica.</p>
+    <p class="label">¿Cuál es el tratamiento de mayor valor de tu clínica?</p>
+    <div class="opts" data-group="top_procedure" data-mode="auto">
+      <p class="opt-group">Odontología</p>
+      <button type="button" class="opt" data-value="implantes">Implantes / All-on-4<span class="chev">›</span></button>
+      <button type="button" class="opt" data-value="diseno_sonrisa">Diseño de sonrisa / carillas<span class="chev">›</span></button>
+      <button type="button" class="opt" data-value="ortodoncia">Ortodoncia invisible<span class="chev">›</span></button>
+      <p class="opt-group">Armonización facial</p>
+      <button type="button" class="opt" data-value="rellenos">Rellenos con ácido hialurónico<span class="chev">›</span></button>
+      <button type="button" class="opt" data-value="toxina">Toxina botulínica<span class="chev">›</span></button>
+      <button type="button" class="opt" data-value="perfilado">Perfilado / rinomodelación<span class="chev">›</span></button>
+      <p class="opt-group">Cirugía plástica</p>
+      <button type="button" class="opt" data-value="lipo_bbl">Lipoescultura / BBL<span class="chev">›</span></button>
+      <button type="button" class="opt" data-value="mamoplastia">Mamoplastia<span class="chev">›</span></button>
+      <button type="button" class="opt" data-value="rinoplastia">Rinoplastia<span class="chev">›</span></button>
+      <button type="button" class="opt" data-value="abdominoplastia">Abdominoplastia<span class="chev">›</span></button>
+      <p class="opt-group">Otro</p>
+      <button type="button" class="opt" data-value="otro">Otro tratamiento<span class="chev">›</span></button>
+    </div>
+    <div class="words"><span>✦</span><input id="own_words_2" placeholder="O escríbelo con tus palabras..."></div>
+    <div class="nav"><button type="button" class="btn" data-next>Siguiente</button></div>
+  </section>
+
+  <!-- 2. Principal reto -->
+  <section class="step" data-step="challenge">
+    <h1>¿Qué te está frenando hoy?</h1>
+    <div class="opts" data-group="challenge" data-mode="auto">
+      <button type="button" class="opt" data-value="pauta_bolsillo">La pauta sale de mi bolsillo y no puedo escalarla<span class="chev">›</span></button>
+      <button type="button" class="opt" data-value="sin_sistema">No tengo un sistema para captar pacientes nuevos<span class="chev">›</span></button>
+      <button type="button" class="opt" data-value="pauta_no_rinde">Invierto en anuncios y no veo resultados<span class="chev">›</span></button>
+      <button type="button" class="opt" data-value="leads_sin_atender">Llegan mensajes y no se atienden a tiempo<span class="chev">›</span></button>
+      <button type="button" class="opt" data-value="pacientes_no_vuelven">Los pacientes no vuelven después del primer tratamiento<span class="chev">›</span></button>
+      <button type="button" class="opt" data-value="no_seguro">No estoy seguro, quiero un diagnóstico<span class="chev">›</span></button>
+    </div>
+    <div class="nav"><button type="button" class="btn back" data-back>Atrás</button></div>
+  </section>
+
+  <!-- 3. Ubicación y web (no están en el formulario de GHL) -->
+  <section class="step" data-step="location">
+    <h1>¿Dónde está tu clínica?</h1>
+    <div class="row">
+      <div class="field"><label for="city">Ciudad</label><input id="city" name="city" autocomplete="address-level2"></div>
+      <div class="field" style="flex:0 0 32%"><label for="state">Estado</label><input id="state" name="state" maxlength="2" placeholder="NY" autocomplete="address-level1"></div>
+    </div>
+    <div class="field"><label for="website">Sitio web o Instagram (opcional)</label><input id="website" name="website" autocomplete="url"></div>
+    <p class="err" id="locationErr"></p>
+    <div class="nav"><button type="button" class="btn back" data-back>Atrás</button><button type="button" class="btn" data-next>Siguiente</button></div>
+  </section>
+
+  <!-- 4. Formulario de GHL "Form dco": nombre, teléfono, correo, ZIP, facturación, idioma, clínica, especialidad, observaciones y casillas -->
+  <section class="step" data-step="form">
+    <h1>Último paso: tus datos de contacto.</h1>
+    <p class="project" id="projectLine"></p>
+    <div class="hp-field" aria-hidden="true">
+      <label for="hp_x7k">No completar</label>
+      <input type="text" id="hp_x7k" name="hp_x7k" tabindex="-1" autocomplete="off">
+    </div>
+    <div id="ghlForm"></div>
+    <div class="nav"><button type="button" class="btn back" data-back>Atrás</button></div>
+  </section>
+
+  <!-- 5. Gracias -->
+  <section class="step thanks center" data-step="thanks">
+    <h1>¡Listo!</h1>
+    <p>Gracias. Te escribimos o te llamamos en breve para coordinar tu diagnóstico.</p>
+  </section>
+
+</form>
+</main>
+
+<footer>
+  <div>
+    © MAIA International Corp (Mastery Aesthetics) · 2807 Jackson Ave, 5FL, Long Island City, NY 11101 · +1 551-319-1344 · support@masteryaesthetics.com<br>
+    <a href="terms-of-service.html">Términos de Servicio</a><a href="privacy-policy.html">Política de Privacidad</a>
+  </div>
+</footer>
+
+<script src="request.js"></script>
+</body>
+</html>
