@@ -86,6 +86,7 @@
     if (push !== false) history.push(current);
     form.querySelectorAll('.step').forEach(function (s) { s.classList.toggle('on', s.dataset.step === step); });
     current = step;
+    document.querySelector('main').classList.toggle('wide', step === 'form');
     $('bar').style.width = (PROGRESS[step] || 10) + '%';
     window.scrollTo(0, 0);
     if (step === 'form') loadGhlForm();
