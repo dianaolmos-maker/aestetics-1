@@ -20,6 +20,11 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none" alt=""
 src="https://www.facebook.com/tr?id=1086369954259982&ev=PageView&noscript=1"></noscript>
 <!-- End Meta Pixel -->
+<style>
+  /* Tarjeta del formulario de GHL a lo ancho: el formulario pasa a dos columnas solo cuando su iframe mide 1025px o más. */
+  .hero .grid > .fcard-wide{grid-column:1/-1;--fw:min(1120px,calc(100vw - 32px));width:var(--fw);max-width:none;margin-inline:calc((100% - var(--fw)) / 2);padding:clamp(16px,2vw,28px)}
+  .fcard-wide iframe{display:block;width:100%;min-height:900px}
+</style>
 </head>
 <body>
 
@@ -53,7 +58,7 @@ src="https://www.facebook.com/tr?id=1086369954259982&ev=PageView&noscript=1"></n
           </ul>
         </div>
 
-        <div class="fcard">
+        <div class="fcard fcard-wide">
           <h3>Diagnóstico de crecimiento</h3>
           <p class="sub">Sin costo y sin compromiso.</p>
 
