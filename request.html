@@ -88,6 +88,8 @@
   .err { color: var(--red); font-size: .85rem; margin: -4px 0 10px; min-height: 1em; }
   .opt-group { padding: 10px 14px 6px; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--smoke); border-bottom: 1px solid var(--line); }
   #ghlForm iframe { display: block; width: 100%; min-height: 900px; }
+  /* En el paso del formulario la página se ensancha: el formulario de GHL pasa a dos columnas solo con 1025px o más. */
+  main:has(.step[data-step="form"].on), main.wide { max-width: 1120px; }
   .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   .thanks h1 { margin-bottom: 10px; }
   .thanks p { color: var(--muted); }
